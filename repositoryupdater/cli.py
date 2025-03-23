@@ -37,9 +37,11 @@ def repository_updater(token, repository, addon, force):
     click.echo(crayons.blue(APP_FULL_NAME, bold=True))
     click.echo(crayons.blue("-" * 51, bold=True))
     github = GitHub(token)
+    user = github.get_user()
+    login = user.login
     click.echo(
         "Authenticated with GitHub as %s"
-        % crayons.yellow(github.get_user().name, bold=True)
+        % crayons.yellow(login, bold=True)
     )
     repository = Repository(github, repository, addon, force)
     repository.update()
